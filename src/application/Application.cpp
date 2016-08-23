@@ -61,11 +61,10 @@ void Application::run() {
 }
 
 void Application::processRender() {
-    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    scene->render();
     ch->Render(glyph_shader, 25.0f, 23.0f, 1.0f, glm::vec3(0.5f, 0.8f, 0.2f));
+    scene->render();
     log->render();
 
     SDL_GL_SwapWindow(window);

@@ -59,11 +59,11 @@ Character::Character(GLubyte character)
 void Character::Render(Shader *shader, GLfloat x, GLfloat y, GLfloat scale, glm::vec3 color)
 {
     shader->Use();
+    return;
 
     //Moved from application.cpp
     glm::mat4 projection = glm::ortho(0.0f, static_cast<GLfloat>(640), 0.0f, static_cast<GLfloat>(480));
-    glUniformMatrix4fv(glGetUniformLocation(shader->Program, "projection"), 1, GL_FALSE,
-                       glm::value_ptr(projection));
+    glUniformMatrix4fv(glGetUniformLocation(shader->Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
 
     glUniform3f(glGetUniformLocation(shader->Program, "textColor"), color.x, color.y, color.z);
     glActiveTexture(GL_TEXTURE0);
