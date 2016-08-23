@@ -36,10 +36,6 @@ public:
     void processEvents();
     void processTick();
     void processRender();
-
-    Shader *glyph_shader;
-    Character *ch;
-
     void setScene(BaseScene*);
 };
 

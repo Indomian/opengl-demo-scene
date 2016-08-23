@@ -102,6 +102,12 @@ SceneVertexCube::SceneVertexCube() {
     glBindVertexArray(0); // unbind VAO
 
     shader = new Shader("shaders/default.vert", "shaders/default.frag");
+
+    projection_matrix = glGetUniformLocation(shader->Program, "MVP");
+
+    glyph_shader = new Shader("shaders/glyphs.vert", "shaders/glyphs.frag");
+
+    ch = new Character('A');
 }
 
 SceneVertexCube::~SceneVertexCube() {
@@ -121,7 +127,7 @@ void SceneVertexCube::render() {
 // она смотрит на точку (0,0,0)
 // вектор, идущий из центра камеры к ее верху, равен (0, 1, 0)
 // то есть, камера расположена горизонтально
-    glm::mat4 V = glm::lookAt(glm::vec3(0, 0, 5), glm::vec3(0, 0, 0),
+    glm::mat4 V = glm::lookAt(glm::vec3(0, 0, 7), glm::vec3(0, 0, 0),
                               glm::vec3(0, 1, 0));
 
 // модель повернута относительно оси OY на 30 градусов
@@ -132,15 +138,15 @@ void SceneVertexCube::render() {
 
     glm::mat4 MVP = P * V * M;
 
-    GLint matrixId = glGetUniformLocation(shader->Program, "MVP");
-    glUniformMatrix4fv(matrixId, 1, GL_FALSE, &MVP[0][0]);
+    glUniformMatrix4fv(projection_matrix, 1, GL_FALSE, &MVP[0][0]);
 
     shader->Use();
     glBindVertexArray(vao);
     glEnableVertexAttribArray(0);
     glDrawArrays(GL_TRIANGLES, 0, VERTEXES_COUNT);
-    glDisableVertexAttribArray(0);
-    glBindVertexArray(0); // unbind VAO
+
+    // glyph_shader->Use();
+    //ch->Render(glyph_shader, 0.0f, 0.0f, 0.1f, glm::vec3(0.5f, 0.8f, 0.2f));
 }
 
 void SceneVertexCube::tick(double dt) {

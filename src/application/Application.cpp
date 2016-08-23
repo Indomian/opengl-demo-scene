@@ -21,11 +21,6 @@ Application::Application(SDL_Window* w, BaseLog* l) {
     window = w;
     frameStart = std::chrono::system_clock::now();
     frameEnd = std::chrono::system_clock::now();
-
-    glyph_shader = new Shader("shaders/glyphs.vert", "shaders/glyphs.frag");
-
-    ch = new Character('A');
-
     log = l;
 }
 
@@ -63,7 +58,6 @@ void Application::run() {
 void Application::processRender() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    ch->Render(glyph_shader, 25.0f, 23.0f, 1.0f, glm::vec3(0.5f, 0.8f, 0.2f));
     scene->render();
     log->render();
 

@@ -7,6 +7,7 @@
 
 
 #include <GLES2/gl2.h>
+#include <application/Character.h>
 #include "BaseScene.h"
 
 class Vertex {
@@ -39,7 +40,11 @@ private:
 
     float xrf, yrf, zrf;
 
+    GLint projection_matrix;
+
     Shader* shader;
+    Shader *glyph_shader;
+    Character *ch;
 public:
     SceneVertexCube();
     ~SceneVertexCube();
