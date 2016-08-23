@@ -12,7 +12,7 @@
 
 #include "application/Application.h"
 #include "utils/COutLog.h"
-#include "structures/SceneCube.h"
+#include "structures/SceneVertexCube.h"
 
 const int width = 640;
 const int height = 480;
@@ -25,7 +25,7 @@ int main(int argc, const char **argv)
 {
     SDL_Window *window = NULL;
     Application *app = NULL;
-    SceneCube *scene = NULL;
+    SceneVertexCube *scene = NULL;
     COutLog *log = NULL;
 
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -65,7 +65,7 @@ int main(int argc, const char **argv)
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     log = new COutLog();
-    scene = new SceneCube();
+    scene = new SceneVertexCube();
 
     app = new Application(window, log);
     app->setScene(scene);

@@ -1,5 +1,8 @@
 #include <iostream>
 #include "Character.h"
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 Character::Character(GLubyte character)
 {
@@ -56,6 +59,11 @@ Character::Character(GLubyte character)
 void Character::Render(Shader *shader, GLfloat x, GLfloat y, GLfloat scale, glm::vec3 color)
 {
     shader->Use();
+
+    //Moved from application.cpp
+    glm::mat4 projection = glm::ortho(0.0f, static_cast<GLfloat>(640), 0.0f, static_cast<GLfloat>(480));
+    glUniformMatrix4fv(glGetUniformLocation(shader->Program, "projection"), 1, GL_FALSE,
+                       glm::value_ptr(projection));
 
     glUniform3f(glGetUniformLocation(shader->Program, "textColor"), color.x, color.y, color.z);
     glActiveTexture(GL_TEXTURE0);

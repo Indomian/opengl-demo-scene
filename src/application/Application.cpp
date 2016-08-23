@@ -22,20 +22,9 @@ Application::Application(SDL_Window* w, BaseLog* l) {
     frameStart = std::chrono::system_clock::now();
     frameEnd = std::chrono::system_clock::now();
 
-    triangle = new Object();
-    default_shader = new Shader("shaders/default.vert", "shaders/default.frag");
     glyph_shader = new Shader("shaders/glyphs.vert", "shaders/glyphs.frag");
 
     ch = new Character('A');
-
-    glm::mat4 projection = glm::ortho(0.0f, static_cast<GLfloat>(640), 0.0f, static_cast<GLfloat>(480));
-    glyph_shader->Use();
-    glUniformMatrix4fv(glGetUniformLocation(glyph_shader->Program, "projection"), 1, GL_FALSE,
-                       glm::value_ptr(projection));
-
-    xrf = 0.0f;
-    yrf = 0.0f;
-    zrf = 0.0f;
 
     log = l;
 }
@@ -75,17 +64,9 @@ void Application::processRender() {
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
 
-    //default_shader->Use();
-    //glBindVertexArray(triangle->VAO);
-    //glDrawArrays(GL_TRIANGLES, 0, 3);
-    //glBindVertexArray(0);
-
+    scene->render();
     ch->Render(glyph_shader, 25.0f, 23.0f, 1.0f, glm::vec3(0.5f, 0.8f, 0.2f));
-    //log->render();
-
-    //scene->render();
     log->render();
-    //glFlush();
 
     SDL_GL_SwapWindow(window);
 }

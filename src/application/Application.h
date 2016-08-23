@@ -28,10 +28,6 @@ class Application {
     application_timepoint frameEnd;
     application_frame_length frameLength;
 
-    Object *triangle;
-
-    float xrf, yrf, zrf;
-
 public:
     Application(SDL_Window*);
     Application(SDL_Window*, BaseLog*);
@@ -41,7 +37,6 @@ public:
     void processTick();
     void processRender();
 
-    Shader *default_shader;
     Shader *glyph_shader;
     Character *ch;
 

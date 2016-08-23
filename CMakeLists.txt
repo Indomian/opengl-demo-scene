@@ -38,7 +38,7 @@ set(SOURCES
         src/application/Character.cpp
         src/structures/BaseScene.cpp
         src/structures/SceneCube.cpp
-)
+        src/structures/SceneVertexCube.cpp src/structures/SceneVertexCube.h)
 
 add_executable(demo ${SOURCES})
 
